@@ -85,10 +85,7 @@ export class getAllMovies {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(
-        this.extractResponseData), 
-      catchError(this.handleError)
-      );
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   // Non-typed response extraction
@@ -108,14 +105,14 @@ export class getAllMovies {
       () => new Error('Something bad happened; please try again later.')
     );
   }
-};
+}
 
 // Get a single movie
 // Expects movie title
 export class getOneMovie {
   constructor(private http: HttpClient) {}
 
-  getSingleMovie(title: any) : Observable<any> {
+  getSingleMovie(title: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiURL + `/movies/${title}`, {
@@ -123,10 +120,7 @@ export class getOneMovie {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(
-        this.extractResponseData), 
-      catchError(this.handleError)
-      );
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
   private extractResponseData(res: Response | Object): any {
@@ -145,16 +139,15 @@ export class getOneMovie {
       () => new Error('Something bad happened; please try again later.')
     );
   }
-
 }
 
 // Get director
 //Expects MovieDirector name
 
 export class getDirector {
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  getDirector(name: any): Observable<any>{
+  getDirector(name: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiURL + `/movies/director/${name}`, {
@@ -162,10 +155,7 @@ export class getDirector {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(
-        this.extractResponseData), 
-      catchError(this.handleError)
-      );
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   private extractResponseData(res: Response | Object): any {
     const body = res;
@@ -183,15 +173,14 @@ export class getDirector {
       () => new Error('Something bad happened; please try again later.')
     );
   }
-
-};
+}
 
 //Get genre
 //Expects genre name
 export class getGenre {
   constructor(private http: HttpClient) {}
 
-  getGenre(name: any): Observable<any>{
+  getGenre(name: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
       .get(apiURL + `/movies/genre/${name}`, {
@@ -199,11 +188,8 @@ export class getGenre {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(
-        this.extractResponseData), 
-      catchError(this.handleError)
-      );
-  };
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
 
   private extractResponseData(res: Response | Object): any {
     const body = res;
@@ -221,24 +207,24 @@ export class getGenre {
       () => new Error('Something bad happened; please try again later.')
     );
   }
-};
+}
 
 //Get a single user
 
 export class getUser {
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
 
-    return this.http.get(apiURL + `/users/${username}`, {headers: new HttpHeaders(
-      {
-        Authorization: 'Bearer ' + token,
-      })}).pipe(
-        map(this.extractResponseData),
-        catchError(this.handleError)
-    );
+    return this.http
+      .get(apiURL + `/users/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   private extractResponseData(res: Response | Object): any {
     const body = res;
@@ -256,6 +242,38 @@ export class getUser {
       () => new Error('Something bad happened; please try again later.')
     );
   }
+}
+//get favorite movies of a user
+export class getFavoriteMovies{
+  constructor(private http: HttpClient) {}
 
+  getFavoriteMovies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http
+      .get(apiURL + `/users/${username}/movies`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), 
+      catchError(this.handleError));
   }
-
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
