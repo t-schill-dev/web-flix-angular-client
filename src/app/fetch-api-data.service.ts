@@ -244,7 +244,7 @@ export class getUser {
   }
 }
 //get favorite movies of a user
-export class getFavoriteMovies{
+export class getFavoriteMovies {
   constructor(private http: HttpClient) {}
 
   getFavoriteMovies(): Observable<any> {
@@ -257,8 +257,76 @@ export class getFavoriteMovies{
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(map(this.extractResponseData), 
-      catchError(this.handleError));
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
+
+//Add movie to favorite list
+// PUT request
+export class addFavorite {
+  constructor(private http: HttpClient) {}
+
+  addFavorite(movieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http
+      .post(apiURL + `/users/${username}/movies/${movieID}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
+
+// Remove favorite movie
+export class removeFavorite {
+  constructor(private http: HttpClient) {}
+
+  removeFavorite(movieID: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http
+      .delete(apiURL + `/users/${username}/movies/${movieID}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   private extractResponseData(res: Response | Object): any {
     const body = res;
