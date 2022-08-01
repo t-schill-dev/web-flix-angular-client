@@ -345,3 +345,71 @@ export class removeFavorite {
     );
   }
 }
+
+// Edit existing user
+export class updateUser {
+  constructor(private http: HttpClient) {}
+
+  updateUser(updateUserDetails: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http
+      .put(apiURL + `/users/${username}`, updateUserDetails, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
+
+//Delete user profile
+export class deleteUser {
+  constructor(private http: HttpClient) {}
+
+  deleteUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http
+      .delete(apiURL + `/users/${username}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer' + token,
+        }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  }
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
