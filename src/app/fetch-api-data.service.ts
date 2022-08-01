@@ -184,4 +184,78 @@ export class getDirector {
     );
   }
 
-}
+};
+
+//Get genre
+//Expects genre name
+export class getGenre {
+  constructor(private http: HttpClient) {}
+
+  getGenre(name: any): Observable<any>{
+    const token = localStorage.getItem('token');
+    return this.http
+      .get(apiURL + `/movies/genre/${name}`, {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + token,
+        }),
+      })
+      .pipe(map(
+        this.extractResponseData), 
+      catchError(this.handleError)
+      );
+  };
+
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+};
+
+//Get a single user
+
+export class getUser {
+  constructor(private http:HttpClient) {}
+
+  getUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+
+    return this.http.get(apiURL + `/users/${username}`, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+    );
+  }
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || {};
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+
+  }
+
