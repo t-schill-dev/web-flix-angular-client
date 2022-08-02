@@ -75,6 +75,29 @@ export class UserRegistrationService {
 //   }
 // }
 
+//calls API endpoint to login an existing user
+export class UserLogin{
+  constructor(private http: HttpClient) {}
+
+  public userLogin(userDetails: any): Observable<any>{
+  return this.http
+  .post(apiURL + 'login', userDetails)
+  .pipe(catchError(this.handleError));
+  }
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+      console.error('Some error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+      );
+    }
+    return throwError(
+      () => new Error('Something bad happened; please try again later.')
+    );
+  }
+}
+
 //Get all movies
 export class getAllMovies {
   constructor(private http: HttpClient) {}

@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Sign In</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <mat-form-field>
+                <!-- Referencing  to the input decorator of component binding inputs to the UserData object by ngModel directive-->
+                <input matInput [(ngModel)]="userData.Username" placeholder="Name" type="text" name="Username" required>
+            </mat-form-field>
+            <mat-form-field>
+                <!-- Referencing  to the input decorator of component-->
+                <input matInput [(ngModel)]="userData.Password" placeholder="Password" type="pasword" name="Password" required>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <!-- Referencing function in component -->
+        <button mat-raised-button (click)="loginUser()" color="secondary">Sign In</button>
+    </mat-card-actions>
+</mat-card>
