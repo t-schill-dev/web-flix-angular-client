@@ -24,7 +24,7 @@ export class AppComponent {
 //opens dialog of Login Component when button clicked
   openLoginDialog(): void {
     this.dialog.open(LoginFormComponent, {
-      width: '300px'
+      width: '280px'
     });
   }
 }

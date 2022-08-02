@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     public fetchApiData: UserLogin,
-    public dialogRef: MatDialogRef<UserLogin>,
+    public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar
   ) { }
 
