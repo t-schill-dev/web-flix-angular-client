@@ -34,44 +34,46 @@ export class UserRegistrationService {
       );
     }
     return throwError(
-      () => new Error('Something bad happened; please try again later.')
+      () => new Error('Unable to register; please try again later.')
     );
   }
 }
 
 //DEFINING ENDPOINTS
-// User Registration
-export class userRegistration {
-  constructor(private http: HttpClient) {}
+// // User Registration
+// export class userRegistration {
+//   constructor(private http: HttpClient) {}
 
-  userRegistration(): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http
-      .post(apiURL + '/users', {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
+//   userRegistration(): Observable<any> {
+//     const token = localStorage.getItem('token');
+//     return this.http
+//       .post(apiURL + '/users', {
+//         headers: new HttpHeaders({
+//           Authorization: 'Bearer ' + token,
+//         }),
+//       })
+//       .pipe(map(this.extractResponseData), catchError(this.handleError));
+//   }
 
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError('Unable to register. Please try again later.');
-  }
+//   private handleError(error: HttpErrorResponse): any {
+//     if (error.error instanceof ErrorEvent) {
+//       console.error('Some error occurred:', error.error.message);
+//     } else {
+//       console.error(
+//         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+//       );
+//     }
+//     return throwError(
+//       () => new Error('Unable to register')
+//     );
+//   }
 
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || {};
-  }
-}
+//   // Non-typed response extraction
+//   private extractResponseData(res: Response | Object): any {
+//     const body = res;
+//     return body || {};
+//   }
+// }
 
 //Get all movies
 export class getAllMovies {
