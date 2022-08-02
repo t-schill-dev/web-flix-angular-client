@@ -81,7 +81,7 @@ export class UserLogin{
 
   public userLogin(userDetails: any): Observable<any>{
   return this.http
-  .post(apiURL + 'login', userDetails)
+  .post(apiURL + '/login', userDetails)
   .pipe(catchError(this.handleError));
   }
   private handleError(error: HttpErrorResponse): any {
