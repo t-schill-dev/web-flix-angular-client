@@ -99,7 +99,7 @@ export class UserLogin{
 }
 
 //Get all movies
-export class getAllMovies {
+export class GetAllMovies {
   constructor(private http: HttpClient) {}
 
   getAllMovies(): Observable<any> {
