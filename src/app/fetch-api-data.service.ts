@@ -25,77 +25,32 @@ export class UserRegistrationService {
       .pipe(catchError(this.handleError));
   }
 
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+  public userLogin(userDetails: any): Observable<any>{
+    return this.http
+    .post(apiURL + '/login', userDetails)
+    .pipe(catchError(this.handleError));
+    }
+    private handleError(error: HttpErrorResponse): any {
+      if (error.error instanceof ErrorEvent) {
+        console.error('Some error occurred:', error.error.message);
+      } else {
+        console.error(
+          `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
+        );
+      }
+      return throwError(
+        () => new Error('Registration or login failed')
       );
     }
-    return throwError(
-      () => new Error('Unable to register; please try again later.')
-    );
-  }
 }
 
 //DEFINING ENDPOINTS
-// // User Registration
-// export class userRegistration {
-//   constructor(private http: HttpClient) {}
-
-//   userRegistration(): Observable<any> {
-//     const token = localStorage.getItem('token');
-//     return this.http
-//       .post(apiURL + '/users', {
-//         headers: new HttpHeaders({
-//           Authorization: 'Bearer ' + token,
-//         }),
-//       })
-//       .pipe(map(this.extractResponseData), catchError(this.handleError));
-//   }
-
-//   private handleError(error: HttpErrorResponse): any {
-//     if (error.error instanceof ErrorEvent) {
-//       console.error('Some error occurred:', error.error.message);
-//     } else {
-//       console.error(
-//         `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-//       );
-//     }
-//     return throwError(
-//       () => new Error('Unable to register')
-//     );
-//   }
-
-//   // Non-typed response extraction
-//   private extractResponseData(res: Response | Object): any {
-//     const body = res;
-//     return body || {};
-//   }
-// }
 
 //calls API endpoint to login an existing user
 export class UserLogin{
   constructor(private http: HttpClient) {}
 
-  public userLogin(userDetails: any): Observable<any>{
-  return this.http
-  .post(apiURL + '/login', userDetails)
-  .pipe(catchError(this.handleError));
-  }
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Error Status code ${error.status}, ` + `Error body is: ${error.error}`
-      );
-    }
-    return throwError(
-      () => new Error('Something bad happened; please try again later.')
-    );
-  }
+  
 }
 
 //Get all movies

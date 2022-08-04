@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import {Router} from '@angular/router';
 // You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // This import brings in the API calls we created in 6.2
-import { UserLogin} from '../fetch-api-data.service';
-import {Router} from '@angular/router';
+import { UserRegistrationService} from '../fetch-api-data.service';
+
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
 @Input() userData = {Username: '', Password: ''}
 
   constructor(
-    public fetchApiData: UserLogin,
+    public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar,
     public router: Router
@@ -43,7 +43,7 @@ export class LoginFormComponent implements OnInit {
         duration: 2000
       });
     });
-    // Navigate to movies page
+    // Navigate to movies page defined in app.module
     this.router.navigate(['movies']);
   }
   }
