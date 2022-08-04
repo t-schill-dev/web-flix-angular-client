@@ -14,11 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { GenreComponentComponent } from './genre-component/genre-component.component';
+import { DirectorComponentComponent } from './director-component/director-component.component';
 
 
 const appRoutes: Routes = [
@@ -33,7 +36,9 @@ const appRoutes: Routes = [
     UserRegistrationFormComponent,
     LoginFormComponent,
     MovieCardComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    GenreComponentComponent,
+    DirectorComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
