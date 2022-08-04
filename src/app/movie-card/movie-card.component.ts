@@ -14,9 +14,10 @@ import {GenreComponent} from '../genre/genre.component';
 export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
+  favoriteMovies: any[] = [];
 
   constructor(
-    public fetchMovies: FetchApiDataService,
+    public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
 
@@ -26,34 +27,54 @@ export class MovieCardComponent implements OnInit {
   //Fuction gets called immediately after mounting
   ngOnInit(): void {
     this.getMovies();
+    this.getFavoriteMovies();
   }
   getMovies(): void {
-    this.fetchMovies.getAllMovies().subscribe((response: any) => {
+    this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
       console.log(this.movies)
       return this.movies;
     })
   }
-  openGenreDialog(name: string, description: string): void {
+  openGenreDialog(name: string): void {
     this.dialog.open(GenreComponent, {
       data: {
         Name: name,
-        Description: description,
       },
       // Assign dialog width
       width: '500px'
     });
   }
-  openDirectorDialog(name: string, bio: string, birthday: Date): void {
+  openDirectorDialog(name: string, bio: string, birth: Date): void {
     this.dialog.open(DirectorComponent, {
       data: {
         Name: name,
         Bio: bio,
-        Birthday: birthday,
+        Birthday: birth,
       },
       // Assign dialog width
       width: '500px'
     });
-
   }
+  getFavoriteMovies(): void {
+    this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
+      this.favoriteMovies = resp;
+      console.log(this.favoriteMovies);
+      return this.favoriteMovies;
+    });
+  }
+  isFav(id: string): boolean {
+    return this.favoriteMovies.includes(id)
+  }
+addToFavoriteMovies(id: string): void {
+  this.fetchApiData.addFavorite(id).subscribe((result) => {
+    this.ngOnInit();
+  })
+}
+
+removeFavoriteMovies(id: string): void {
+  this.fetchApiData.removeFavorite(id).subscribe((result) => {
+    this.ngOnInit();
+  })
+}
 }
