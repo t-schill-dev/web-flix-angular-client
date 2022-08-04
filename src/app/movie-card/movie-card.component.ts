@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GetAllMovies} from '../fetch-api-data.service'ö
+import {GetAllMovies} from '../fetch-api-data.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({

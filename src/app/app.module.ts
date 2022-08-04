@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
 //In order to use external API, import this module
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +21,11 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 
-
+const appRoutes: Routes = [
+  {path: 'welcome', component: WelcomePageComponent},
+  {path: 'movies', component: MovieCardComponent},
+  {path: '', redirectTo:'welcome', pathMatch: 'prefix'}
+]
 
 @NgModule({
   declarations: [
@@ -34,6 +39,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    RouterModule.forRoot(appRoutes),
     BrowserAnimationsModule,
     FormsModule,
     MatDialogModule,
