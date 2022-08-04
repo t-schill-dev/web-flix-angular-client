@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GetAllMovies} from '../fetch-api-data.service';
+import {FetchApiDataService} from '../fetch-api-data.service';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
@@ -11,7 +11,7 @@ export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
 
-  constructor(public fetchMovies: GetAllMovies) { }
+  constructor(public fetchMovies: FetchApiDataService) { }
 
   //Fuction gets called immediately after mounting
   ngOnInit(): void {

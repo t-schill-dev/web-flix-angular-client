@@ -6,7 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // This import brings in the API calls we created in 6.2
-import { UserRegistrationService} from '../fetch-api-data.service';
+import { FetchApiDataService} from '../fetch-api-data.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
 @Input() userData = {Username: '', Password: ''}
 
   constructor(
-    public fetchApiData: UserRegistrationService,
+    public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public snackBar: MatSnackBar,
     public router: Router
