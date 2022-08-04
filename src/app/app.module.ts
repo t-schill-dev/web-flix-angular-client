@@ -17,6 +17,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 
 
 
@@ -26,7 +27,8 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
     AppComponent,
     UserRegistrationFormComponent,
     LoginFormComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

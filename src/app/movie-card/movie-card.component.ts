@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {GetAllMovies} from '../fetch-api-data.service'
+import {GetAllMovies} from '../fetch-api-data.service'ö
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-movie-card',
@@ -12,6 +13,7 @@ export class MovieCardComponent implements OnInit {
 
   constructor(public fetchMovies: GetAllMovies) { }
 
+  //Fuction gets called immediately after mounting
   ngOnInit(): void {
     this.getMovies();
   }
