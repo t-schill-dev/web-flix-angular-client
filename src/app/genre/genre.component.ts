@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./genre.component.scss']
 })
 export class GenreComponent implements OnInit {
-
+//Retrieve data from invoced function in movie card component
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
