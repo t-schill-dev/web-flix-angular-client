@@ -17,7 +17,7 @@ import { FetchApiDataService} from '../fetch-api-data.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-@Input() userData = {Username: '', Password: ''}
+@Input() userData = {username: '', password: ''}
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -39,13 +39,13 @@ export class LoginFormComponent implements OnInit {
       localStorage.setItem('token', result.token);
       localStorage.setItem('user', result.user.Username);
       this.snackBar.open('Login successful', 'OK', {
-        duration: 1000
+        duration: 2000
       });
        // Navigate to movies page defined in app.module
     this.router.navigate(['movies']);
     }, (result) => {
       this.snackBar.open(result, 'OK', {
-        duration: 1000
+        duration: 2000
       });
     });
    
