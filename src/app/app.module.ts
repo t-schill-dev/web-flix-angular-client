@@ -23,6 +23,7 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     WelcomePageComponent,
     GenreComponent,
     DirectorComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
