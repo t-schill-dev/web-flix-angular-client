@@ -24,6 +24,7 @@ import { GenreComponent } from './genre/genre.component';
 import { DirectorComponent } from './director/director.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 
@@ -44,6 +45,8 @@ const appRoutes: Routes = [
     GenreComponent,
     DirectorComponent,
     NavBarComponent,
+    ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
