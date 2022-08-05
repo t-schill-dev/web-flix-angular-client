@@ -40,8 +40,8 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     })
   }
-  getMovieGenres(): void{
-    this.fetchApiData.getGenre(name).subscribe((response:any) => {
+  getMovieGenres(title: any): void{
+    this.fetchApiData.getGenres(title).subscribe((response:any) => {
       this.genres = response;
       return this.genres;
     })
