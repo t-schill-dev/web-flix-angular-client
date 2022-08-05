@@ -37,7 +37,7 @@ export class LoginFormComponent implements OnInit {
       console.log(result)
       // Add token and username to local Storage
       localStorage.setItem('token', result.token);
-      localStorage.setItem('user', result.user.Username);
+      localStorage.setItem('user', result.user.username);
       this.snackBar.open('Login successful', 'OK', {
         duration: 2000
       });
