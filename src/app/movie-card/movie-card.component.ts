@@ -5,6 +5,8 @@ import {MatSnackBar} from '@angular/material/snack-bar'
 
 import {DirectorComponent} from '../director/director.component';
 import {GenreComponent} from '../genre/genre.component';
+import {DescriptionComponent} from '../description/description.component'
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -63,6 +65,16 @@ export class MovieCardComponent implements OnInit {
       // Assign dialog width
       width: '500px'
     });
+  }
+
+  openDescriptionDialog(title: string, description: string): void{
+    this.dialog.open(DescriptionComponent, {
+      data: {
+        Title: title,
+        Description: description
+      },
+      width: '500px'
+    })
   }
   getFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
