@@ -15,6 +15,7 @@ export class MovieCardComponent implements OnInit {
 
   movies: any[] = [];
   favoriteMovies: any[] = [];
+  genres: any[] = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -34,6 +35,12 @@ export class MovieCardComponent implements OnInit {
       this.movies = response;
       console.log(this.movies)
       return this.movies;
+    })
+  }
+  getMovieGenres(): void{
+    this.fetchApiData.getGenre(name).subscribe((response:any) => {
+      this.genres = response;
+      return this.genres;
     })
   }
   openGenreDialog(name: string): void {
