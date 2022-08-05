@@ -1,7 +1,14 @@
-<app-nav-bar></app-nav-bar>
 <div class="user-profile-page">
     <!-- User Profile -->
     <mat-card class="user-profile-card">
-
+        <mat-card-header class="user-profile-card-header">
+            <mat-card-title>Profile information</mat-card-title>
+        </mat-card-header>
+        <!-- View Profile information -->
+        <mat-card-content>
+            <p><b>Name: </b>{{user.username}}</p>
+            <p><b>Email: </b>{{user.email}}</p>
+            <p><b>Birthday: </b>{{user.birthday}}</p>
+        </mat-card-content>
     </mat-card>
 </div>
