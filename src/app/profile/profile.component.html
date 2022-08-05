@@ -10,5 +10,17 @@
             <p><b>Email: </b>{{user.email}}</p>
             <p><b>Birthday: </b>{{user.birthday}}</p>
         </mat-card-content>
+
+        <!-- Edit profile -->
+        <mat-card-actions>
+            <button mat-raised-button (click)="openEditDialog()" color="primary">
+            <mat-icon>edit</mat-icon>
+            Edit Profile
+          </button>
+            <button mat-raised-button (click)="deleteProfile()" color="warn">
+            <mat-icon>delete_forever</mat-icon>
+            Edit Profile
+          </button>
+        </mat-card-actions>
     </mat-card>
 </div>
