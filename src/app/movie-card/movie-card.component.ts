@@ -6,7 +6,6 @@ import {MatSnackBar} from '@angular/material/snack-bar'
 import {DirectorComponent} from '../director/director.component';
 import {GenreComponent} from '../genre/genre.component';
 import {DescriptionComponent} from '../description/description.component'
-import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -40,9 +39,10 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     })
   }
-  getMovieGenres(title: any): void{
-    this.fetchApiData.getGenres(title).subscribe((response:any) => {
+  getMovieGenres(title: any[]): void{
+    this.fetchApiData.getGenres(title).subscribe((response:any[]) => {
       this.genres = response;
+      console.log('Genres:', response)
       return this.genres;
     })
   }

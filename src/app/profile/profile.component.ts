@@ -21,12 +21,15 @@ export class ProfileComponent implements OnInit {
     public snackBar: MatSnackBar,
     public router: Router
   ) {}
-
-  ngOnInit(): void {}
+  
+  ngOnInit( ): void {
+    this.getUserData();
+  }
   //Gets userdata from API
-  getUser(): void {
+  getUserData(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
+      console.log(result)
       return this.user;
     });
   }
