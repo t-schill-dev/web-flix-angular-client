@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FetchApiDataService} from '../fetch-api-data.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar'
+import { FetchApiDataService } from '../fetch-api-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import {DirectorComponent} from '../director/director.component';
-import {GenreComponent} from '../genre/genre.component';
-import {DescriptionComponent} from '../description/description.component'
-
+import { DirectorComponent } from '../director/director.component';
+import { GenreComponent } from '../genre/genre.component';
+import { DescriptionComponent } from '../description/description.component';
 
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
-  styleUrls: ['./movie-card.component.scss']
+  styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-
   movies: any[] = [];
   favoriteMovies: any[] = [];
   genres: any[] = [];
@@ -23,9 +21,7 @@ export class MovieCardComponent implements OnInit {
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
-
-    )
-     { }
+  ) {}
 
   //Fuction gets called immediately after mounting
   ngOnInit(): void {
@@ -35,25 +31,25 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      console.log(this.movies)
+      console.log(this.movies);
       return this.movies;
-    })
+    });
   }
-  getMovieGenres(title: any[]): void{
-    this.fetchApiData.getGenres(title).subscribe((response:any[]) => {
+  getMovieGenres(title: any[]): void {
+    this.fetchApiData.getGenres(title).subscribe((response: any[]) => {
       this.genres = response;
-      console.log('Genres:', response)
+      console.log('Genres:', response);
       return this.genres;
-    })
+    });
   }
   openGenreDialog(): void {
-    this.dialog.open(GenreComponent,{
+    this.dialog.open(GenreComponent, {
       data: {
-        Genres: this.genres
+        Genres: this.genres,
       },
       // Assign dialog width
-      width: '500px'}
-    );
+      width: '500px',
+    });
   }
   openDirectorDialog(name: string, bio: string, birth: Date): void {
     this.dialog.open(DirectorComponent, {
@@ -63,38 +59,38 @@ export class MovieCardComponent implements OnInit {
         Birthday: birth,
       },
       // Assign dialog width
-      width: '500px'
+      width: '500px',
     });
   }
 
-  openDescriptionDialog(title: string, plot: string): void{
+  openDescriptionDialog(title: string, plot: string): void {
     this.dialog.open(DescriptionComponent, {
       data: {
         Title: title,
-        Plot: plot
+        Plot: plot,
       },
-      width: '500px'
-    })
+      width: '500px',
+    });
   }
   getFavoriteMovies(): void {
     this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
       this.favoriteMovies = resp;
-      console.log(this.favoriteMovies);
+      console.log('favorites: ', this.favoriteMovies);
       return this.favoriteMovies;
     });
   }
   isFav(id: string): boolean {
-    return this.favoriteMovies.includes(id)
+    return this.favoriteMovies.includes(id);
   }
-addToFavoriteMovies(id: string): void {
-  this.fetchApiData.addFavorite(id).subscribe((result) => {
-    this.ngOnInit();
-  })
-}
+  addToFavoriteMovies(id: string): void {
+    this.fetchApiData.addFavorite(id).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 
-removeFavoriteMovies(id: string): void {
-  this.fetchApiData.removeFavorite(id).subscribe((result) => {
-    this.ngOnInit();
-  })
-}
+  removeFavoriteMovies(id: string): void {
+    this.fetchApiData.removeFavorite(id).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
 }

@@ -10,9 +10,8 @@ export class GenreComponent implements OnInit {
 //Retrieve data from invoced function in movie card component
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: {
-      Name: string;
-    }
+    public data: []
+    
 
   ) { }
 
