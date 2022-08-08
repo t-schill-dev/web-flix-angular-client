@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: any = {};
+  movies: any = []
+  favoriteMovies: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -29,17 +31,36 @@ export class ProfileComponent implements OnInit {
   getUserData(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
-      console.log(result)
+      this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+        this.movies = resp;
+        this.favoriteMovies.forEach((movie: any) => {
+          if (this.user.favoriteMovies.includes(movie._id)) {
+            this.favoriteMovies.push(movie)
+          }
+        });
+      })
       return this.user;
     });
   }
-
+  getFavoriteMovies(): void {
+    this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
+      this.favoriteMovies = resp;
+      console.log('favorites: ', this.favoriteMovies);
+      return this.favoriteMovies;
+    });
+  }
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
-      width: '3oopx',
+      width: '300px',
     });
   }
 
+  removeFavoriteMovies(id: string): void {
+    this.fetchApiData.removeFavorite(id).subscribe((result) => {
+      this.ngOnInit();
+    });
+  }
+  
   deleteProfile(): void {
     if (confirm('Are you sure you want to delete your profile?')) {
       this.router.navigate(['welcome']).then(() => {

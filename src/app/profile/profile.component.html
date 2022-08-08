@@ -1,30 +1,47 @@
 <app-nav-bar></app-nav-bar>
 <div class="user-profile-page">
     <!-- User Profile -->
-    <mat-card class="user-profile-card">
+    <mat-card class="card-container">
         <mat-card-header class="user-profile-card-header">
             <mat-card-title>Profile information</mat-card-title>
         </mat-card-header>
         <!-- View Profile information -->
+        <mat-card-content class="card-content">
+            <label for="name">Name: </label><span>{{ user.username }}</span
+      ><br />
+      <label for="email"><b>Email: </b></label><span>{{ user.email }}</span
+      ><br />
+      <label for="birthday"><b>Birthday: </b></label
+      ><span>{{ user.birthday }}</span
+      ><br />
+    </mat-card-content>
+    
+    <!-- Edit profile -->
+    <mat-card-actions>
+      <button mat-raised-button (click)="openEditDialog()" color="primary">
+        <mat-icon>edit</mat-icon>
+        Edit Profile
+      </button>
+      <button mat-raised-button (click)="deleteProfile()" color="warn">
+        <mat-icon>delete_forever</mat-icon>
+        Delete Profile
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="card-container fav-movies-container">
+    <mat-card-header class="card-header">
+      <mat-card-title>My Movies</mat-card-title>
+      <mat-card-subtitle class="displayMessage" *ngIf="user.favoriteMovies == 0">Looks pretty lonely over here. Add some Movies!</mat-card-subtitle>
+    </mat-card-header>
+    <div class="scroll-container">
+      <mat-card *ngFor="let movie of favoriteMovies; let i = index" class="movie-card">
         <mat-card-content>
-            <p><b>Name: </b>{{user.username}}</p>
-            <p><b>Email: </b>{{user.email}}</p>
-            <p><b>Birthday: </b>{{user.birthday}}</p>
+          <img src={{movie.imageUrl}} alt={{movie.title}} width="220"/>
+          <button class="remove-button" mat-button color="accent" (click)="removeFavoriteMovies(movie._id)">
+            <mat-icon>favorite</mat-icon>
+          </button>
         </mat-card-content>
-        <mat-card *ngFor="let movie of user.favoriteMovies; let i=index">
-
-            <img src="{{movie.imageUrl}}" alt="{{movie.title}}" style="width: 280px">
-        </mat-card>
-        <!-- Edit profile -->
-        <mat-card-actions>
-            <button mat-raised-button (click)="openEditDialog()" color="primary">
-            <mat-icon>edit</mat-icon>
-            Edit Profile
-          </button>
-            <button mat-raised-button (click)="deleteProfile()" color="warn">
-            <mat-icon>delete_forever</mat-icon>
-            Edit Profile
-          </button>
-        </mat-card-actions>
-    </mat-card>
+      </mat-card>
+    </div>
+  </mat-card>
 </div>
