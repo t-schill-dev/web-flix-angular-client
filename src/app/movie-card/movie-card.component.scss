@@ -1,0 +1,31 @@
+.title {
+    font-family: var(--title-font);
+    font-weight: 600;
+}
+
+.movie-view {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: black;
+}
+
+.movie-card {
+    margin: 10px 0 10px 0;
+    // color: white;
+    // background-color: transparent;
+    border: 1px solid #efefef;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    img {
+        width: 280px;
+        height: 350px;
+    }
+}
+
+.card-actions>button {
+    color: teal;
+    text-shadow: 3px;
+}
