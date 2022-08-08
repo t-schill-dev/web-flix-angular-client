@@ -12,7 +12,7 @@ export class DescriptionComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) 
     public data: {
       Title: string,
-      Description: string
+      Plot: string
     }
   ) { }
 

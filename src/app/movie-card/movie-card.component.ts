@@ -46,14 +46,14 @@ export class MovieCardComponent implements OnInit {
       return this.genres;
     })
   }
-  openGenreDialog(name: string): void {
-    this.dialog.open(GenreComponent, {
+  openGenreDialog(): void {
+    this.dialog.open(GenreComponent,{
       data: {
-        Name: name,
+        Genres: this.genres
       },
       // Assign dialog width
-      width: '500px'
-    });
+      width: '500px'}
+    );
   }
   openDirectorDialog(name: string, bio: string, birth: Date): void {
     this.dialog.open(DirectorComponent, {
@@ -67,11 +67,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  openDescriptionDialog(title: string, description: string): void{
+  openDescriptionDialog(title: string, plot: string): void{
     this.dialog.open(DescriptionComponent, {
       data: {
         Title: title,
-        Description: description
+        Plot: plot
       },
       width: '500px'
     })
