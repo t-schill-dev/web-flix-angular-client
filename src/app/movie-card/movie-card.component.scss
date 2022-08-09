@@ -16,8 +16,7 @@
     border: 1px solid #efefef;
     position: relative;
     overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    max-width: 300px;
     img {
         width: 280px;
         height: 350px;
