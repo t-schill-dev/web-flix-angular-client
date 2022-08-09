@@ -10,23 +10,41 @@
     margin-top: 50px;
 }
 
-.user-page-header {
+.title {
     font-family: var(--title-font);
-    font-size: 60px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6rem;
 }
 
 .card-content {
-    margin: 10px;
+    padding: 10px;
     font-size: 1.2em;
-    border: 1px solid;
+    border: 1px dotted;
+    display: flex;
+    flex-direction: row;
 }
 
-.card-content>label {
-    width: 100px;
+.label-container {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    min-width: 100px;
     font-weight: 600;
-    margin: 5px 10px 5px 0;
-    color: red;
-    background-color: gray;
+    font-size: 1.2rem;
+    padding: 5px 10px 5px 0;
 }
 
-span {}
+.profile-data {
+    padding: 5px 10px 5px 0;
+}
+
+// Movie view
+.scroll-container {
+    overflow-x: scroll;
+    display: flex;
+    padding: 2%;
+}
