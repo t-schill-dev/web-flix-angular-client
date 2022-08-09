@@ -1,8 +1,16 @@
 .nav-bar {
-    background-color: grey;
-    border-bottom: black;
+    background-color: #efefef;
+    border-bottom: whitesmoke;
+    height: auto;
 }
 
-.logout-button {
+.nav-bar button {
+    font-size: 1.5rem;
+    color: teal;
+    padding: 1rem;
+}
+
+.navbar-right {
     float: right;
+    align-items: center;
 }
