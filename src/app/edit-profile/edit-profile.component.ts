@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-  @Input() userData: any = {};
+  user: any = {}
+  
+  @Input() userData: any = {
+    Username: this.user.username,
+    Password: this.user.password, 
+    Email: this.user.email,
+  };
 
   constructor(
     public dialog: MatDialog,
@@ -20,8 +26,18 @@ export class EditProfileComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUser()
+  }
 
+  
+  getUser(): void {
+this.fetchApiData.getUser().subscribe((resp: any) => {
+  this.user = resp;
+  return this.user;
+})
+  }
+  
   editProfile(): void {
     this.fetchApiData.updateUser(this.userData).subscribe((result) => {
       this.dialogRef.close();
