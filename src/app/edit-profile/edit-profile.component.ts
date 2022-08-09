@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-  user: any = {}
-  
+  user: any = {};
+
   @Input() userData: any = {
-    Username: this.user.username,
-    Password: this.user.password, 
-    Email: this.user.email,
+    username: this.user.username,
+    password: this.user.password,
+    email: this.user.email,
   };
 
   constructor(
@@ -27,17 +27,16 @@ export class EditProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUser()
+    this.getUser();
   }
 
-  
   getUser(): void {
-this.fetchApiData.getUser().subscribe((resp: any) => {
-  this.user = resp;
-  return this.user;
-})
+    this.fetchApiData.getUser().subscribe((resp: any) => {
+      this.user = resp;
+      return this.user;
+    });
   }
-  
+
   editProfile(): void {
     this.fetchApiData.updateUser(this.userData).subscribe((result) => {
       this.dialogRef.close();
@@ -48,9 +47,8 @@ this.fetchApiData.getUser().subscribe((resp: any) => {
     });
     localStorage.clear();
     this.snackBar.open('Please log in with your new credentials', 'OK', {
-      duration: 2000
-    })
+      duration: 2000,
+    });
     this.router.navigate(['welcome']);
-    
   }
 }

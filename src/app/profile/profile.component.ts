@@ -60,18 +60,17 @@ export class ProfileComponent implements OnInit {
       this.ngOnInit();
     });
   }
-  
+
   deleteProfile(): void {
     if (confirm('Are you sure you want to delete your profile?')) {
-      this.router.navigate(['welcome']).then(() => {
-        this.snackBar.open('Your profile has been deleted', 'OK', {
-          duration: 1000,
-        });
-      });
       // API call to delete profile
       this.fetchApiData.deleteUser().subscribe(() => {
         localStorage.clear();
       });
-    }
-  }
+      this.router.navigate(['welcome']).then(() => {
+        this.snackBar.open('Your profile has been deleted', 'OK', {
+          duration: 2000,
+        });
+       });
+    }}
 }
