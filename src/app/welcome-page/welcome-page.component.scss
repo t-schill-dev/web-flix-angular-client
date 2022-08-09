@@ -1,9 +1,15 @@
-.main-page {
+.container {
     height: 100vh;
+    background-image: url('../../assets/image/movie-theater-picture.jpg');
+    background-size: cover;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+}
+
+.main-page {
     text-align: center;
+    height: 300px;
 }
 
 h1 {
