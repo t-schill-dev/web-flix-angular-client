@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-genre',
@@ -16,7 +17,8 @@ export class GenreComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      Movies: any[];
+      Title: string;
+      Genres: [];
     }
   ) {}
 

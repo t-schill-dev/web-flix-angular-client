@@ -16,9 +16,7 @@ export class MovieCardComponent implements OnInit {
   user: any = {};
   movies: any[] = [];
   favoriteMovies: any[] = [];
-  moviesOfGenre: any[] = [];
   
-
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -77,18 +75,23 @@ export class MovieCardComponent implements OnInit {
    * @param data passes data to genre component
    */
   openGenreDialog(title:any): void {
+    //filters
+    let genres = this.movies.map((movie)=> {
+      if (movie.title === title) {
+        return movie.genres
+      }}
+    )
+      
+    console.log('genres', genres)
     this.dialog.open(GenreComponent, {
       data: {
-        Movies: this.moviesOfGenre,
+        Title: title,
+        Genres: genres
       },
       // Assign dialog width
       width: '500px',
     });
-    this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
-      this.moviesOfGenre = response;
-      console.log('Genres:', response);
-      return this.moviesOfGenre;
-    });
+    
   }
   /**
    * Open dialog to display director details

@@ -1,3 +1,10 @@
+.fav-icon {
+    float: right;
+    bottom: 70px;
+    right: 10px;
+    color: #efefef;
+}
+
 .title {
     font-family: var(--title-font);
     font-weight: 600;
@@ -11,19 +18,30 @@
 
 .movie-card {
     margin: 10px 0 10px 0;
-    // color: white;
-    // background-color: transparent;
+    background-color: transparent;
     border: 1px solid #efefef;
     position: relative;
     overflow: hidden;
-    max-width: 300px;
+    max-width: 350px;
     img {
         width: 280px;
         height: 350px;
     }
 }
 
+#card-header {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    .subtitle {
+        margin-left: 15px;
+        font-style: italic;
+    }
+}
+
 .card-actions>button {
     color: teal;
-    text-shadow: 3px;
+    background-color: #efefef;
+    border: 1px solid;
+    margin: 4px;
 }
