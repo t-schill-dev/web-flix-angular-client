@@ -28,7 +28,15 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { DescriptionComponent } from './description/description.component';
 
 
-
+/**
+ * Defining routes and navigate where applicable
+ * @example
+ * ```ts
+ * constructor{public router = Router}
+ * this.router.navigate(['movies']);
+ * ```
+ * @requires RouterModule
+ */
 const appRoutes: Routes = [
   {path: 'welcome', component: WelcomePageComponent},
   {path: 'movies', component: MovieCardComponent},

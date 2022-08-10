@@ -29,7 +29,11 @@ export class EditProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
   }
-
+/**
+ * GET request to receive user data
+ * @function getUser
+ * @returns {object} user data
+ */
   getUser(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.user = resp;
@@ -37,6 +41,12 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * PUT request to update user, clears local storage and redirects to welcome screen
+   * @function updateUser
+   * @param {object} userData
+   * @returns {object} updated user
+   */
   editProfile(): void {
     this.fetchApiData.updateUser(this.userData).subscribe((result) => {
       this.dialogRef.close();
