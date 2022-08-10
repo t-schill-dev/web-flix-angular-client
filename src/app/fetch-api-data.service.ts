@@ -13,12 +13,20 @@ const apiURL = 'https://web-flix-movies.herokuapp.com';
 @Injectable({
   providedIn: 'root',
 })
+/**
+ * Class is grouping public functions to request data from API
+ * @constructor http module
+ */
 export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) {}
   
-  // Making the api call for the user registration endpoint
+  /**
+ * POST request to API to register new user
+ * @function userRegistration
+ * @param userDetails
+ */
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http
@@ -26,14 +34,22 @@ export class FetchApiDataService {
       .pipe(catchError(this.handleError));
   }
 
-  //calls API endpoint to login existing user
+   /**
+ * POST request to API to log in existing user
+ * @function userLogin
+ * @param userDetails
+ */
   public userLogin(userDetails: any): Observable<any>{
     return this.http
     .post(apiURL + '/login', userDetails)
     .pipe(catchError(this.handleError));
     }
     
-//Get all movies
+ /**
+ * GET request to API to return all movies
+ * @function getAllMovies
+ * @returns {array} of movie objects
+ */
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -45,8 +61,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-// Get a single movie
-// Expects movie title
+/**
+ * GET request to API to return a single movies
+ * @function getSingleMovie
+ * @param title
+ * @returns {object}
+ */
   getSingleMovie(title: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
@@ -58,8 +78,12 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-// Get director
-//Expects MovieDirector name
+/**
+ * GET request to API to return director details
+ * @function getDirector
+ * @param name
+ * @returns {object}
+ */
 
   getDirector(name: any): Observable<any> {
     const token = localStorage.getItem('token');
@@ -74,12 +98,16 @@ export class FetchApiDataService {
   
   
 
-//Get genre
-//Expects genre name
-  getGenres(title: any): Observable<any> {
+/**
+ * GET request to API to return movies to corresponding genre
+ * @function getMoviesToGenre
+ * @param title of movie
+ * @returns {array}
+ */
+  getMoviesToGenre(title: any): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiURL + `/movies/${title}`, {
+      .get(apiURL + `/movies/genres/${title}`, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
@@ -88,7 +116,11 @@ export class FetchApiDataService {
   }
 
 
-//Get a single user
+/**
+ * GET request to API to return user details
+ * @function getUser
+ * @returns {object}
+ */
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -101,23 +133,30 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
+//! currently unactivated
+// /**
+//  * GET request to API to return favorite movies to corresponding user
+//  * @function getMoviesToGenre
+//  * @returns {array}
+//  */
+//   getFavoriteMovies(): Observable<any> {
+//     const token = localStorage.getItem('token');
+//     const username = localStorage.getItem('user');
 
-//get favorite movies of a user
-  getFavoriteMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
-    const username = localStorage.getItem('user');
+//     return this.http
+//       .get(apiURL + `/users/${username}/movies`, {
+//         headers: new HttpHeaders({
+//           Authorization: 'Bearer ' + token,
+//         }),
+//       })
+//       .pipe(map(this.extractResponseData), catchError(this.handleError));
+//   }
 
-    return this.http
-      .get(apiURL + `/users/${username}/movies`, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-
-//Add movie to favorite list
-// PUT request
+/**
+ * PUT request to API to add favorite movie to user data
+ * @function addFavorite
+ * @param movieID
+ */
   addFavorite(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -131,8 +170,11 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   
-
-// Remove favorite movie
+/**
+ * DELETE request to API to remove favorite movie from user data
+ * @function removeFavorite
+ * @param movieID
+ */
   removeFavorite(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -147,7 +189,12 @@ export class FetchApiDataService {
   }
  
 
-// Edit existing user
+/**
+ * PUT request to API to update user data
+ * @function updateUser
+ * @param updateUserDetails
+ * @return updatedUser
+ */
   updateUser(updateUserDetails: any): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -162,7 +209,10 @@ export class FetchApiDataService {
   }
 
 
-//Delete user profile
+/**
+ * DELETE request to API to remove user profile
+ * @function deleteUser
+ */
   deleteUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -175,6 +225,8 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
+
+  //Function to be called by every function above to return data
   private extractResponseData(res: Response | Object): any {
     const body = res;
     return body || {};
