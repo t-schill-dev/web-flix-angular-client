@@ -1,6 +1,15 @@
-.title {
-    font-family: var(--title-font);
-    font-weight: 600;
+.header {
+    color: #efefef;
+    display: flex;
+    flex-direction: column;
+    .title {
+        font-family: var(--title-font);
+        font-weight: 600;
+    }
+    .subtitle {
+        margin-left: 16px;
+        font-style: italic;
+    }
 }
 
 .movie-view {
@@ -10,20 +19,34 @@
 }
 
 .movie-card {
-    margin: 10px 0 10px 0;
-    // color: white;
-    // background-color: transparent;
+    margin: 10px 10px 10px 0;
+    background-color: transparent;
     border: 1px solid #efefef;
     position: relative;
     overflow: hidden;
-    max-width: 300px;
+    width: 310px;
     img {
-        width: 280px;
+        width: 300px;
         height: 350px;
     }
 }
 
-.card-actions>button {
+.card-actions {
+    display: flex;
+    justify-content: space-evenly;
+    button {
+        color: #efefef;
+        margin: 0;
+        border: 1px solid;
+        background-color: teal;
+    }
+}
+
+.genre-chip {
+    background-color: #efefef;
+    opacity: 75%;
     color: teal;
-    text-shadow: 3px;
+    border-radius: 25px;
+    margin: 5px 10px 10px 0;
+    padding: 8px;
 }

@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DirectorComponent } from '../director/director.component';
-import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 
 @Component({
@@ -16,7 +15,7 @@ export class MovieCardComponent implements OnInit {
   user: any = {};
   movies: any[] = [];
   favoriteMovies: any[] = [];
-  moviesOfGenre: any[] = [];
+
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -56,32 +55,7 @@ export class MovieCardComponent implements OnInit {
       return this.movies;
     });
   }
-  /**
-   * Request to match other movies with genre
-   * @function getMovieGenres
-   * @param title 
-   * @returns {array} of corresponding movies
-   */
-  getMovieGenres(title: string): void {
-    this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
-      this.moviesOfGenre = response;
-      console.log('Genres:', response);
-      return this.moviesOfGenre;
-    });
-  }
-  /**
-   * Open dialog to display corresponding movies
-   * @param data passes data to genre component
-   */
-  openGenreDialog(): void {
-    this.dialog.open(GenreComponent, {
-      data: {
-        Movies: this.moviesOfGenre,
-      },
-      // Assign dialog width
-      width: '500px',
-    });
-  }
+
   /**
    * Open dialog to display director details
    * @param {object} data  passes data to director component
