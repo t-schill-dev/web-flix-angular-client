@@ -1,6 +1,19 @@
-# WebFlixAngularClient
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0.
+# Angular Movies App
+
+Using Angular and TypeScript to create a beautiful UI and interact with the REST API  on the backend in the 'web-flix-app'-Repository.
+
+
+## Installation
+
+### Install dependencies for meet-app with npm
+
+```bash
+  git clone https://github.com/t-schill-dev/web-flix-angular-client.git
+  cd web-flix-angular-client
+  npm install
+  
+```
 
 ## Development server
 
@@ -12,16 +25,38 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Run `ng build` to build the project to the corresponding GH pages. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Features
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A user can 
+- See all available movies
+- Get details about the plot, director and genres
+- Save and delete movies as favorites
+- Update and delete profile
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Documentation
 
-## Further help
+### Dependencies
+**For Development**
+- Angular Material
+- Angular Router
+- Http Client Module
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Screenshots
+
+![App Screenshot](https://freeimage.host/i/screenshot-2022-08-10-191754.U4O9bS)
+![App Screenshot](https://freeimage.host/i/screenshot-2022-08-10-191828.U4OJz7)
+
+
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](http://timon-schill.atwebpages.com/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
+
+
+
+
+
+
+
