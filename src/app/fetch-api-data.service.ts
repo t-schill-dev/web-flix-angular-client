@@ -95,26 +95,6 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
-  
-  
-
-/**
- * GET request to API to return movies to corresponding genre
- * @function getMoviesToGenre
- * @param title of movie
- * @returns {array}
- */
-  getMoviesToGenre(title: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http
-      .get(apiURL + `/movies/genres/${title}`, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-
 
 /**
  * GET request to API to return user details
@@ -153,7 +133,7 @@ export class FetchApiDataService {
 //   }
 
 /**
- * PUT request to API to add favorite movie to user data
+ * POSTrequest to API to add favorite movie to user data
  * @function addFavorite
  * @param movieID
  */
@@ -164,7 +144,7 @@ export class FetchApiDataService {
     return this.http
       .post(apiURL + `/users/${username}/movies/${movieID}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -182,7 +162,7 @@ export class FetchApiDataService {
     return this.http
       .delete(apiURL + `/users/${username}/movies/${movieID}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -202,7 +182,7 @@ export class FetchApiDataService {
     return this.http
       .put(apiURL + `/users/${username}`, updateUserDetails, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -220,7 +200,7 @@ export class FetchApiDataService {
     return this.http
       .delete(apiURL + `/users/${username}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer' + token,
+          Authorization: 'Bearer ' + token,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));

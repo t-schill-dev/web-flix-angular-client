@@ -4,7 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DirectorComponent } from '../director/director.component';
-import { GenreComponent } from '../genre/genre.component';
 import { DescriptionComponent } from '../description/description.component';
 
 @Component({
@@ -16,8 +15,7 @@ export class MovieCardComponent implements OnInit {
   user: any = {};
   movies: any[] = [];
   favoriteMovies: any[] = [];
-  moviesOfGenre: any[] = [];
-  
+
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -52,44 +50,13 @@ export class MovieCardComponent implements OnInit {
         if (this.user.favoriteMovies.includes(movie._id)) {
           this.favoriteMovies.push(movie)
         }
-    
+
       });
       console.log('favorites:', this.favoriteMovies);
       return this.movies;
     });
   }
 
-  /**
-   * Request to match other movies with genre
-   * @function getMovieGenres
-   * @param title 
-   * @returns {array} of corresponding movies
-   */
-  // getMovieGenres(title: string): void {
-  //   this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
-  //     this.moviesOfGenre = response;
-  //     console.log('Genres:', response);
-  //     return this.moviesOfGenre;
-  //   });
-  // }
-  /**
-   * Open dialog to display corresponding movies
-   * @param data passes data to genre component
-   */
-  openGenreDialog(title:any): void {
-    this.dialog.open(GenreComponent, {
-      data: {
-        Movies: this.moviesOfGenre,
-      },
-      // Assign dialog width
-      width: '500px',
-    });
-    this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
-      this.moviesOfGenre = response;
-      console.log('Genres:', response);
-      return this.moviesOfGenre;
-    });
-  }
   /**
    * Open dialog to display director details
    * @param {object} data  passes data to director component
@@ -144,10 +111,12 @@ export class MovieCardComponent implements OnInit {
    * PUT request to add movie to userdata
    * calling function from API
    * @function addFavorite
-   * @param {string} id 
+   * @param {string} id
    */
   addToFavoriteMovies(id: string): void {
     this.fetchApiData.addFavorite(id).subscribe((result) => {
+      this.favoriteMovies = result;
+      console.log('added', result)
       this.ngOnInit();
     });
   }
@@ -155,7 +124,7 @@ export class MovieCardComponent implements OnInit {
    * DELETE request to remove movie to userdata
    * calling function from API
    * @function removeFavorite
-   * @param {string} id 
+   * @param {string} id
    */
   removeFavoriteMovies(id: string): void {
     this.fetchApiData.removeFavorite(id).subscribe((result) => {
