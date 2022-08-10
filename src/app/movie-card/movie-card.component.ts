@@ -17,6 +17,7 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   favoriteMovies: any[] = [];
   moviesOfGenre: any[] = [];
+  
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -47,39 +48,46 @@ export class MovieCardComponent implements OnInit {
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      this.movies.forEach((movie: any) => {
+      this.favoriteMovies.forEach((movie: any) => {
         if (this.user.favoriteMovies.includes(movie._id)) {
           this.favoriteMovies.push(movie)
         }
+    
       });
-      console.log(this.movies);
+      console.log('favorites:', this.favoriteMovies);
       return this.movies;
     });
   }
+
   /**
    * Request to match other movies with genre
    * @function getMovieGenres
    * @param title 
    * @returns {array} of corresponding movies
    */
-  getMovieGenres(title: string): void {
-    this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
-      this.moviesOfGenre = response;
-      console.log('Genres:', response);
-      return this.moviesOfGenre;
-    });
-  }
+  // getMovieGenres(title: string): void {
+  //   this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
+  //     this.moviesOfGenre = response;
+  //     console.log('Genres:', response);
+  //     return this.moviesOfGenre;
+  //   });
+  // }
   /**
    * Open dialog to display corresponding movies
    * @param data passes data to genre component
    */
-  openGenreDialog(): void {
+  openGenreDialog(title:any): void {
     this.dialog.open(GenreComponent, {
       data: {
         Movies: this.moviesOfGenre,
       },
       // Assign dialog width
       width: '500px',
+    });
+    this.fetchApiData.getMoviesToGenre(title).subscribe((response: any[]) => {
+      this.moviesOfGenre = response;
+      console.log('Genres:', response);
+      return this.moviesOfGenre;
     });
   }
   /**

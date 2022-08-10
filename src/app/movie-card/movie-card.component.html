@@ -8,7 +8,7 @@
         </mat-card-header>
         <mat-card-actions class="card-actions">
 
-            <button *ngFor="let genre of genres; let i = index" mat-button (click)="openGenreDialog()" color="primary"> 
+            <button *ngFor="let genre of movie.genres; let i = index" mat-button (click)="openGenreDialog(genre)" color="primary"> 
             {{movie.genre}}
       </button>
             <button mat-button (click)="

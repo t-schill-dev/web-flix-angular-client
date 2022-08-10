@@ -1,5 +1,5 @@
 <mat-card class="genre-dialog">
-    <mat-card-title class="genre-dialog-title">{{ data }}</mat-card-title>
+    <mat-card-title *ngFor="let movie of data.Movies" class="genre-dialog-title">{{ movie.title }}</mat-card-title>
     <br />
 
     <mat-card-actions class="genre-actions">

@@ -4,18 +4,21 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
-  styleUrls: ['./genre.component.scss']
+  styleUrls: ['./genre.component.scss'],
 })
 export class GenreComponent implements OnInit {
-//Retrieve data from invoced function in movie card component
+  /**
+   * Receives data from invoced openDialog function in movie card component
+   * @param data
+   * @requires MAT_DIALOG_DATA
+   */
+
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: []
-    
+    public data: {
+      Movies: any[];
+    }
+  ) {}
 
-  ) { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
