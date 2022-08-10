@@ -27,13 +27,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit( ): void {
     this.getUserData();
   }
-  //Gets userdata from API
+ /**
+  * GET request to return user data and all movies
+  * Filters 
+  * @function getUser
+  * @function getAllMovies
+  * @return {object} user data
+  * @returns {array} of movies
+  * @returns {array} of favorite movies
+  */
   getUserData(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
       this.fetchApiData.getAllMovies().subscribe((resp: any) => {
         this.movies = resp;
-        this.favoriteMovies.forEach((movie: any) => {
+        this.movies.forEach((movie: any) => {
           if (this.user.favoriteMovies.includes(movie._id)) {
             this.favoriteMovies.push(movie)
           }
@@ -42,13 +50,14 @@ export class ProfileComponent implements OnInit {
       return this.user;
     });
   }
-  getFavoriteMovies(): void {
-    this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
-      this.favoriteMovies = resp;
-      console.log('favorites: ', this.favoriteMovies);
-      return this.favoriteMovies;
-    });
-  }
+  //! currently unactivated
+  // getFavoriteMovies(): void {
+  //   this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
+  //     this.favoriteMovies = resp;
+  //     console.log('favorites: ', this.favoriteMovies);
+  //     return this.favoriteMovies;
+  //   });
+  // }
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '300px',
@@ -60,7 +69,10 @@ export class ProfileComponent implements OnInit {
       this.ngOnInit();
     });
   }
-
+  /**
+   * Confirmation dialog to verify action, delete profile and redirect to welcome screen
+   * @function deleteUser call from API
+   */
   deleteProfile(): void {
     if (confirm('Are you sure you want to delete your profile?')) {
       // API call to delete profile
