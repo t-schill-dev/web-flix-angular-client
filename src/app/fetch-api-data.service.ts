@@ -95,26 +95,6 @@ export class FetchApiDataService {
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
-  
-  
-
-/**
- * GET request to API to return movies to corresponding genre
- * @function getMoviesToGenre
- * @param title of movie
- * @returns {array}
- */
-  getMoviesToGenre(title: any): Observable<any> {
-    const token = localStorage.getItem('token');
-    return this.http
-      .get(apiURL + `/movies/genres/${title}`, {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
-  }
-
 
 /**
  * GET request to API to return user details
