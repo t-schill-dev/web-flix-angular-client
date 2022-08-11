@@ -84,12 +84,13 @@ export class MovieCardComponent implements OnInit {
   
   /**
    * Validation if movie is marked as favorite
+   * User stores ids
    * @function isFav
    * @param {string} id
    * @returns {boolean}
    */
   isFav(id: string): boolean {
-    return this.favoriteMovies.includes(id);
+    return this.user.favoriteMovies.includes(id);
   }
 /**
    * PUT request to add movie to userdata
