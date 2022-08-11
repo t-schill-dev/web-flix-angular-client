@@ -26,46 +26,63 @@ export class ProfileComponent implements OnInit {
   
   ngOnInit( ): void {
     this.getUserData();
+    this.getMovieData()
   }
  /**
   * GET request to return user data and all movies
   * Filters 
   * @function getUser
-  * @function getAllMovies
   * @return {object} user data
-  * @returns {array} of movies
-  * @returns {array} of favorite movies
   */
   getUserData(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
-      this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-        this.movies = resp;
-        this.movies.forEach((movie: any) => {
-          if (this.user.favoriteMovies.includes(movie._id)) {
-            this.favoriteMovies.push(movie)
-          }
-        });
       })
       return this.user;
-    });
-  }
-  //! currently unactivated
-  // getFavoriteMovies(): void {
-  //   this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
-  //     this.favoriteMovies = resp;
-  //     console.log('favorites: ', this.favoriteMovies);
-  //     return this.favoriteMovies;
-  //   });
+    };
+/**
+  * GET request to return user data and all movies
+  * Filters 
+  * @function getAllMovies
+  * @returns {object} of movies in the provided array
+  * @returns {object} of favorite movies in the provided array
+  */
+  getMovieData():void {
+    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
+      this.movies = resp;
+      //Method adds movie object to the array on every matching id on the users favortite movies
+      resp.forEach((movie: any) => {
+        if (this.user.favoriteMovies.includes(movie._id)) {
+          this.favoriteMovies.push(movie)
+          console.log('movies', this.favoriteMovies)
+        }
+      });
+  })
+}
+  // /**
+  //  * Validation if movie is marked as favorite
+  //  * @function isFav
+  //  * @param {string} id
+  //  * @returns {boolean}
+  //  */
+  //  isFav(id: string): boolean {
+  //   return this.user.favoriteMovies.includes(id);
   // }
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '300px',
     });
   }
-
+  /**
+  * DELETE request to remove movie to userdata
+  * calling function from API
+  * @function removeFavorite
+  * @param {string} id
+  * @returns {object} updated User
+  */
   removeFavoriteMovies(id: string): void {
     this.fetchApiData.removeFavorite(id).subscribe((result) => {
+      //this.user = result;
       this.ngOnInit();
     });
   }
