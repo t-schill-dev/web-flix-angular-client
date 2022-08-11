@@ -39,9 +39,9 @@
             <mat-card-subtitle class="displayMessage" *ngIf="user.favoriteMovies == 0">Looks pretty lonely over here. Add some Movies!</mat-card-subtitle>
         </mat-card-header>
         <div class="scroll-container">
-            <mat-card *ngFor="let movie of favoriteMovies; let i = index" class="movie-card">
+            <mat-card *ngFor="let movie of favoriteMovies; let i = index" class="fav-card">
                 <mat-card-content>
-                    <img src="{{ movie.imageUrl }}" alt="{{ movie.title }}" width="220" />
+                    <img class='fav-image' src="{{ movie.imageUrl }}" alt="{{ movie.title }}" width="220" />
                     <button class="remove-button" mat-button color="accent" (click)="removeFavoriteMovies(movie._id)">
             <mat-icon>favorite</mat-icon>
           </button>

@@ -48,3 +48,21 @@ label {
     display: flex;
     padding: 2%;
 }
+
+.fav-movies-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.fav-card {
+    margin: 5px;
+    border: 1px solid teal;
+}
+
+.fav-image {
+    height: 300px;
+}
+
+.displayMessage {
+    text-align: center;
+}
