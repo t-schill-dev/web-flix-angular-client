@@ -37,22 +37,18 @@ export class MovieCardComponent implements OnInit {
   getUser(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
+      console.log('updated', result)
   })
 }
   /**
-   * GET request to return all movies
+   * GET request to return all movies and favorite movies of user
    * @returns {array} of movies
    */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
-      this.favoriteMovies.forEach((movie: any) => {
-        if (this.user.favoriteMovies.includes(movie._id)) {
-          this.favoriteMovies.push(movie)
-        }
-
-      });
-      console.log('favorites:', this.favoriteMovies);
+      //initiates favorite movies array
+      this.favoriteMovies = this.user.favoriteMovies;
       return this.movies;
     });
   }
@@ -85,19 +81,7 @@ export class MovieCardComponent implements OnInit {
       width: '500px',
     });
   }
-  //!currently unactivated
-  // /**
-  //  * GET request to return favorite movies
-  //  * @function getFavoriteMovies
-  //  * @returns {array}
-  //  */
-  // getFavoriteMovies(): void {
-  //   this.fetchApiData.getFavoriteMovies().subscribe((resp: any) => {
-  //     this.favoriteMovies = resp;
-  //     console.log('favorites: ', this.favoriteMovies);
-  //     return this.favoriteMovies;
-  //   });
-  // }
+  
   /**
    * Validation if movie is marked as favorite
    * @function isFav
@@ -115,8 +99,7 @@ export class MovieCardComponent implements OnInit {
    */
   addToFavoriteMovies(id: string): void {
     this.fetchApiData.addFavorite(id).subscribe((result) => {
-      this.favoriteMovies = result;
-      console.log('added', result)
+      this.favoriteMovies = result.favoriteMovies;
       this.ngOnInit();
     });
   }
@@ -128,6 +111,7 @@ export class MovieCardComponent implements OnInit {
    */
   removeFavoriteMovies(id: string): void {
     this.fetchApiData.removeFavorite(id).subscribe((result) => {
+      this.favoriteMovies = result.favoriteMovies;
       this.ngOnInit();
     });
   }

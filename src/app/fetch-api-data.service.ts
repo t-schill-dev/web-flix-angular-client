@@ -133,16 +133,15 @@ export class FetchApiDataService {
 //   }
 
 /**
- * POSTrequest to API to add favorite movie to user data
+ * POST request to API to add favorite movie to user data
  * @function addFavorite
  * @param movieID
  */
   addFavorite(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
-
     return this.http
-      .post(apiURL + `/users/${username}/movies/${movieID}`, {
+      .post(apiURL + `/users/${username}/movies/${movieID}`, null, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
