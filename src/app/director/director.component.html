@@ -4,7 +4,8 @@
     <mat-dialog-content class="director-dialog-content">
         <div>
             <b>Birthday: </b>
-            <p> {{ data.Birthday}}</p>
+            <!-- Using pipe to convert date -->
+            <p> {{ data.Birthday | date: 'longDate'}}</p>
         </div>
 
         <div>

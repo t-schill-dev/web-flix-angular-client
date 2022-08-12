@@ -17,7 +17,8 @@
             <div>
                 <p>{{ user.username }}</p>
                 <p>{{ user.email }}</p>
-                <p>{{ user.birthday }}</p>
+                <!-- Using pipe to convert date -->
+                <p>{{ user.birthday | date: 'longDate'}}</p>
             </div>
         </mat-card-content>
 
