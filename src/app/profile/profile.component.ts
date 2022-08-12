@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   user: any = {};
   movies: any = []
-  favoriteMovies: any = [];
+  favMovies: any = [];
 
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -26,7 +26,8 @@ export class ProfileComponent implements OnInit {
   
   ngOnInit( ): void {
     this.getUserData();
-    this.getMovieData()
+    
+    
   }
  /**
   * GET request to return user data and all movies
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   getUserData(): void {
     this.fetchApiData.getUser().subscribe((result: any) => {
       this.user = result;
+      this.getMovieData(this.user)
       })
       return this.user;
     };
@@ -44,30 +46,33 @@ export class ProfileComponent implements OnInit {
   * GET request to return user data and all movies
   * Filters 
   * @function getAllMovies
+  * @param {object} user to make function dependent on userdata
   * @returns {object} of movies in the provided array
   * @returns {object} of favorite movies in the provided array
   */
-  getMovieData():void {
+  getMovieData(user: any):void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      //Method adds movie object to the array on every matching id on the users favortite movies
-      resp.forEach((movie: any) => {
-        if (this.user.favoriteMovies.includes(movie._id)) {
-          this.favoriteMovies.push(movie)
-          console.log('movies', this.favoriteMovies)
-        }
-      });
+      // Function to update favorites after receiving movie data
+      this.getFavs(user)
   })
 }
-  // /**
-  //  * Validation if movie is marked as favorite
-  //  * @function isFav
-  //  * @param {string} id
-  //  * @returns {boolean}
-  //  */
-  //  isFav(id: string): boolean {
-  //   return this.user.favoriteMovies.includes(id);
-  // }
+/**
+  * Update favMovie array
+  * Method adds movie object to the array on every matching id on the users favortite movies
+  * @param {object} user to make function dependent on userdata
+  */
+getFavs(user: any):void {
+
+this.movies.forEach((movie: any) => {
+  console.log('favs on profile', user.favoriteMovies)
+  if (user.favoriteMovies.includes(movie._id)) {
+    //Add to array
+    this.favMovies.push(movie)
+    console.log('movies in array', this.favMovies)
+  }
+});
+}
   openEditDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: '300px',
@@ -82,7 +87,7 @@ export class ProfileComponent implements OnInit {
   */
   removeFavoriteMovies(id: string): void {
     this.fetchApiData.removeFavorite(id).subscribe((result) => {
-      //this.user = result;
+      // get updated user
       this.ngOnInit();
     });
   }

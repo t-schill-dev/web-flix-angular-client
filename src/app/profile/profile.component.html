@@ -36,12 +36,12 @@
     <mat-card class="card-container fav-movies-container">
         <mat-card-header class="card-header">
             <mat-card-title class="title">My Movies</mat-card-title>
-            <mat-card-subtitle class="displayMessage" *ngIf="user.favoriteMovies == 0">Looks pretty lonely over here. Add some Movies!</mat-card-subtitle>
+            <mat-card-subtitle class="displayMessage" *ngIf="user.favoriteMovies.length == 0">Looks pretty lonely over here. Add some Movies!</mat-card-subtitle>
         </mat-card-header>
         <div class="scroll-container">
-            <mat-card *ngFor="let movie of favoriteMovies; let i = index" class="fav-card">
+            <mat-card *ngFor="let movie of favMovies; let i = index" class="fav-card">
                 <mat-card-content>
-                    <img class='fav-image' src="{{ movie.imageUrl }}" alt="{{ movie.title }}" width="220" />
+                    <img class='fav-image' src="{{ movie.imageUrl }}" alt="{{ movie.title }}" />
                     <button class="remove-button" mat-button color="accent" (click)="removeFavoriteMovies(movie._id)">
             <mat-icon>favorite</mat-icon>
           </button>

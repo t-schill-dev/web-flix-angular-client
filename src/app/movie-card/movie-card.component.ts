@@ -25,8 +25,10 @@ export class MovieCardComponent implements OnInit {
 
   //Fuction gets called immediately after mounting
   ngOnInit(): void {
-    this.getMovies();
+   
     this.getUser();
+    // Call function as dependency to user data
+    this.getMovies(this.user);
   }
   /**
    * GET request to return user data
@@ -44,11 +46,11 @@ export class MovieCardComponent implements OnInit {
    * GET request to return all movies and favorite movies of user
    * @returns {array} of movies
    */
-  getMovies(): void {
+  getMovies(user: any): void {
     this.fetchApiData.getAllMovies().subscribe((response: any) => {
       this.movies = response;
       //initiates favorite movies array
-      this.favoriteMovies = this.user.favoriteMovies;
+      this.favoriteMovies = user.favoriteMovies;
       return this.movies;
     });
   }
