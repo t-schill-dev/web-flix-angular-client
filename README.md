@@ -3,9 +3,7 @@
 
 Using Angular and TypeScript to create a beautiful UI and interact with the REST API  on the backend in the 'web-flix-app'-Repository.
 
-
-## Installation
-
+## Getting started
 ### Install dependencies for meet-app with npm
 
 ```bash
@@ -14,18 +12,6 @@ Using Angular and TypeScript to create a beautiful UI and interact with the REST
   npm install
   
 ```
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project to the corresponding GH pages. The build artifacts will be stored in the `dist/` directory.
 
 ## Key Features
 * Welcome view where users are able to either log in or register an account
@@ -59,7 +45,7 @@ ng --version
 npm install -g @angular/cli
 ```
 
-### Create a new Angular project
+### Create a new Angular project or clone (as above in "getting started")
 1. Navigate to folder and create project
 ```bash
 ng new my-project-name
@@ -151,21 +137,18 @@ import { RouterModule, Routes } from '@angular/router';
 
 3. Create routes in app.module.ts
 
-### (Optional) Deploy application on github pages
+### (Optional) Deploy application on netlify
 
 1. If not done yet: Create github repository for application
 
 2. If also not done yet: Link the new remote repository to the local project folder. To do so, simply run this command from inside your project folder (replace <GitHub-username> and <repository-name> with your own GitHub username and repository name): git remote add origin https://github.com/<GitHub-username>/<repository-name>.git
 
-3. Add angular-cli-ghpages by running 
-```bash
-ng add angular-cli-ghpages.
-```
+3. Create account on netlify
+4. Import repository to netlify
+5. Build settings:
+Build command: `npm run build`
+Publish directory: `dist/web-flix-angular-client`
 
-4. Build your application (i.e., generate static HTML, CSS, and JavaScript files out of your application so that browsers can interpret them without the need to use any extra tools/plugins). To do so, run the following command, replacing <repository-name> with your own repository name:
-```bash
- ng deploy --base-href=/<repository-name>/.
-```
 
 ### Add TypeDoc Documentation
 1. Install typedoc (if not yet installed):
@@ -180,21 +163,24 @@ npm install typedoc
 npx typedoc --entryPointStrategy expand ./src
 ```
 
+## General 
+### Local development
 
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+### Code scaffolding
 
-## Documentation
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+### Build
+
+Run `ng build` to build the project to the corresponding GH pages. The build artifacts will be stored in the `dist/` directory.
 
 ### Dependencies
-**For Development**
+
 - Angular Material
 - Angular Router
 - Http Client Module
-
-## Screenshots
-
-![App Screenshot](https://freeimage.host/i/screenshot-2022-08-10-191754.U4O9bS)
-![App Screenshot](https://freeimage.host/i/screenshot-2022-08-10-191828.U4OJz7)
 
 
 ## 🔗 Links
